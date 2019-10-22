@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
   #config.vm.provision :shell, path: "shellscript.sh"
 
   config.vm.provision "shell", inline: <<-SHELL
-    touch /tmp/teste.txt
+  touch /tmp/teste.txt
+  touch /tmp/teste2.txt
   SHELL
 
 end

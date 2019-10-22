@@ -1,0 +1,21 @@
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+
+          - name: Instalando o htop
+            apt:
+                    name: htop
+                    state: present
+
+          - name: Criando usuario analista
+            user:
+                    name: analista
+                    state: present
+
+          - name: Ajustando o TimeZone do Servidor
+            timezone:
+                    name: America/Sao_Paulo
+
