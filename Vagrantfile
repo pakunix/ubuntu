@@ -14,17 +14,18 @@ Vagrant.configure("2") do |config|
   ## Configurações de Size da VM
   config.vm.provider "virtualbox" do |v|
      v.name = "ubuntu"
-     v.memory = 1024
+     v.memory = 512
      v.cpus = 2
   end
   
-  ## Opções para Configurar a Máquina sem Gerência de Configuração
+  ## Integrando o Ansible no Provisionamento
 
-  #config.vm.provision :shell, path: "shellscript.sh"
-
-  config.vm.provision "shell", inline: <<-SHELL
-  touch /tmp/teste.txt
-  touch /tmp/teste2.txt
-  SHELL
+  config.vm.provision :ansible_local do |ansible|
+     ansible.install_mode = "pip"
+     ansible.playbook = "playbook.yml"
+     ansible.verbose  = true
+     ansible.install  = true
+     ansible.limit    = "all"
+  end
 
 end
